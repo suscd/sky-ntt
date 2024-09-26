@@ -18,9 +18,9 @@ use anchor_lang::prelude::*;
 use solana_program::instruction::Instruction;
 use wormhole_anchor_sdk::wormhole::PostedVaa;
 use wormhole_io::{Readable, Writeable};
-use wormhole_sdk::{Chain, GOVERNANCE_EMITTER};
+use wormhole_sdk::Chain;
 
-use crate::error::GovernanceError;
+use crate::{error::GovernanceError, GOV_AUTHORITY};
 
 pub const OWNER: Pubkey = sentinel_pubkey(b"owner");
 pub const PAYER: Pubkey = sentinel_pubkey(b"payer");
@@ -50,8 +50,8 @@ pub struct Governance<'info> {
     pub governance: UncheckedAccount<'info>,
 
     #[account(
-        constraint = vaa.emitter_chain() == Into::<u16>::into(Chain::Solana) @ GovernanceError::InvalidGovernanceChain,
-        constraint = *vaa.emitter_address() == GOVERNANCE_EMITTER.0 @ GovernanceError::InvalidGovernanceEmitter,
+        constraint = vaa.emitter_chain() == Into::<u16>::into(Chain::Ethereum) @ GovernanceError::InvalidGovernanceChain,
+        constraint = *vaa.emitter_address() == GOV_AUTHORITY @ GovernanceError::InvalidGovernanceEmitter,
         constraint = vaa.payload.1.governance_program_id == crate::ID @ GovernanceError::InvalidGovernanceProgram,
     )]
     pub vaa: Account<'info, PostedVaa<GovernanceMessage>>,
@@ -296,7 +296,7 @@ fn test_governance_message_parse_guardian() {
     // }
     // ```
     // TODO: once this program is moved into the monorepo, do an e2e integration test
-    let h = hex::decode("000000000000000047656e6572616c507572706f7365476f7665726e616e63650200010e027fbc6b1e61365d4b0680a3179f791b15796f93e24e9b441e3fa04ccda4a000000000000000010000000000000000000000000000000000000000000000000002000000000000000200000000000000000000000000000000000000000000000001010000000000000003000000000000000000000000000000000000000000000000000100050102030405").unwrap();
+    let h = hex::decode("000000000000000047656e6572616c507572706f7365476f7665726e616e636502000106742d7ca523a03aaafe48abab02e47eb8aef53415cb603c47a3ccf864d86dc000000000000000010000000000000000000000000000000000000000000000000002000000000000000200000000000000000000000000000000000000000000000001010000000000000003000000000000000000000000000000000000000000000000000100050102030405").unwrap();
     let actual = GovernanceMessage::deserialize(&mut h.as_slice()).unwrap();
 
     let accounts = vec![
