@@ -17,8 +17,7 @@ use wormhole_governance::{
     error::GovernanceError,
     instructions::{GovernanceMessage, ReplayProtection, OWNER},
 };
-use wormhole_sdk::{Address, Vaa, GOVERNANCE_EMITTER};
-use wormhole_solana_utils::cpi::bpf_loader_upgradeable;
+use wormhole_sdk::{Address, Vaa};
 
 use crate::{
     common::{query::GetAccountDataAnchor, setup::setup, submit::Submittable},
@@ -48,8 +47,9 @@ async fn post_governance_vaa<A: Clone + AnchorSerialize>(
             signatures: vec![],
             timestamp: 123232,
             nonce: 0,
-            emitter_chain: wormhole_sdk::Chain::Solana,
-            emitter_address: emitter_override.unwrap_or(GOVERNANCE_EMITTER),
+            emitter_chain: wormhole_sdk::Chain::Ethereum,
+            emitter_address: emitter_override
+                .unwrap_or(Address(wormhole_governance::GOV_AUTHORITY)),
             sequence,
             consistency_level: 0,
             payload: gov_message,
@@ -73,8 +73,6 @@ async fn test_governance() {
         owner: test_data.program_owner.pubkey(),
         new_owner: governance_pda,
         upgrade_lock: test_data.ntt.upgrade_lock(),
-        program_data: test_data.ntt.program_data(),
-        bpf_loader_upgradeable_program: bpf_loader_upgradeable::id(),
     };
 
     Instruction {
@@ -92,8 +90,6 @@ async fn test_governance() {
         new_owner: OWNER,
         config: test_data.ntt.config(),
         upgrade_lock: test_data.ntt.upgrade_lock(),
-        program_data: test_data.ntt.program_data(),
-        bpf_loader_upgradeable_program: bpf_loader_upgradeable::id(),
     };
 
     let inner_ix: Instruction = Instruction {
@@ -148,8 +144,6 @@ async fn test_governance_one_step_transfer() {
         owner: test_data.program_owner.pubkey(),
         new_owner: governance_pda,
         upgrade_lock: test_data.ntt.upgrade_lock(),
-        program_data: test_data.ntt.program_data(),
-        bpf_loader_upgradeable_program: bpf_loader_upgradeable::id(),
     };
 
     Instruction {
@@ -220,8 +214,6 @@ async fn test_governance_bad_governance_contract() {
         owner: test_data.program_owner.pubkey(),
         new_owner: governance_pda,
         upgrade_lock: test_data.ntt.upgrade_lock(),
-        program_data: test_data.ntt.program_data(),
-        bpf_loader_upgradeable_program: bpf_loader_upgradeable::id(),
     };
 
     Instruction {
@@ -239,8 +231,6 @@ async fn test_governance_bad_governance_contract() {
         new_owner: OWNER,
         config: test_data.ntt.config(),
         upgrade_lock: test_data.ntt.upgrade_lock(),
-        program_data: test_data.ntt.program_data(),
-        bpf_loader_upgradeable_program: bpf_loader_upgradeable::id(),
     };
 
     let inner_ix: Instruction = Instruction {
@@ -284,8 +274,6 @@ async fn test_governance_replay() {
         owner: test_data.program_owner.pubkey(),
         new_owner: governance_pda,
         upgrade_lock: test_data.ntt.upgrade_lock(),
-        program_data: test_data.ntt.program_data(),
-        bpf_loader_upgradeable_program: bpf_loader_upgradeable::id(),
     };
 
     Instruction {
@@ -303,8 +291,6 @@ async fn test_governance_replay() {
         new_owner: OWNER,
         config: test_data.ntt.config(),
         upgrade_lock: test_data.ntt.upgrade_lock(),
-        program_data: test_data.ntt.program_data(),
-        bpf_loader_upgradeable_program: bpf_loader_upgradeable::id(),
     };
 
     let inner_ix: Instruction = Instruction {

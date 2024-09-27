@@ -635,14 +635,30 @@
           "name": "upgradeLock",
           "isMut": false,
           "isSigner": false
-        },
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "transferOwnershipOneStepUnchecked",
+      "accounts": [
         {
-          "name": "programData",
+          "name": "config",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "bpfLoaderUpgradeableProgram",
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "newOwner",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "upgradeLock",
           "isMut": false,
           "isSigner": false
         }
@@ -666,16 +682,6 @@
           "name": "newOwner",
           "isMut": false,
           "isSigner": true
-        },
-        {
-          "name": "programData",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "bpfLoaderUpgradeableProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": []

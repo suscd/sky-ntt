@@ -635,14 +635,30 @@ export type ExampleNativeTokenTransfers = {
           "name": "upgradeLock",
           "isMut": false,
           "isSigner": false
-        },
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "transferOwnershipOneStepUnchecked",
+      "accounts": [
         {
-          "name": "programData",
+          "name": "config",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "bpfLoaderUpgradeableProgram",
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "newOwner",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "upgradeLock",
           "isMut": false,
           "isSigner": false
         }
@@ -666,16 +682,6 @@ export type ExampleNativeTokenTransfers = {
           "name": "newOwner",
           "isMut": false,
           "isSigner": true
-        },
-        {
-          "name": "programData",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "bpfLoaderUpgradeableProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": []
@@ -1950,7 +1956,8 @@ export type ExampleNativeTokenTransfers = {
       "msg": "NoRegisteredTransceivers"
     }
   ]
-}
+};
+
 export const IDL: ExampleNativeTokenTransfers = {
   "version": "2.0.0",
   "name": "example_native_token_transfers",
@@ -2588,14 +2595,30 @@ export const IDL: ExampleNativeTokenTransfers = {
           "name": "upgradeLock",
           "isMut": false,
           "isSigner": false
-        },
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "transferOwnershipOneStepUnchecked",
+      "accounts": [
         {
-          "name": "programData",
+          "name": "config",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "bpfLoaderUpgradeableProgram",
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "newOwner",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "upgradeLock",
           "isMut": false,
           "isSigner": false
         }
@@ -2619,16 +2642,6 @@ export const IDL: ExampleNativeTokenTransfers = {
           "name": "newOwner",
           "isMut": false,
           "isSigner": true
-        },
-        {
-          "name": "programData",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "bpfLoaderUpgradeableProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": []
@@ -3903,5 +3916,4 @@ export const IDL: ExampleNativeTokenTransfers = {
       "msg": "NoRegisteredTransceivers"
     }
   ]
-}
-
+};

@@ -86,6 +86,13 @@ export namespace NTT {
   /** pdas returns an object containing all functions to compute program addresses */
   export const pdas = (programId: PublicKeyInitData) => {
     const configAccount = (): PublicKey => derivePda("config", programId);
+    const upgradeLockAccount = (): PublicKey =>
+      derivePda("upgrade_lock", programId);
+    const programDataAccount = (): PublicKey =>
+      derivePda(
+        new PublicKey(programId).toBytes(),
+        BPF_LOADER_UPGRADEABLE_PROGRAM_ID
+      );
     const emitterAccount = (): PublicKey => derivePda("emitter", programId);
     const inboxRateLimitAccount = (chain: Chain): PublicKey =>
       derivePda(["inbox_rate_limit", chainToBytes(chain)], programId);
@@ -139,6 +146,8 @@ export namespace NTT {
     // TODO: memoize?
     return {
       configAccount,
+      upgradeLockAccount,
+      programDataAccount,
       outboxRateLimitAccount,
       inboxRateLimitAccount,
       inboxItemAccount,
@@ -726,16 +735,19 @@ export namespace NTT {
   export async function createTransferOwnershipInstruction(
     program: Program<NttBindings.NativeTokenTransfer<IdlVersion>>,
     args: {
+      payer: PublicKey;
       newOwner: PublicKey;
     },
     pdas?: Pdas
   ) {
     pdas = pdas ?? NTT.pdas(program.programId);
     return await program.methods
-      .transferOwnership()
+      .transferOwnershipOneStepUnchecked()
       .accounts({
         config: pdas.configAccount(),
+        upgradeLock: pdas.upgradeLockAccount(),
         newOwner: args.newOwner,
+        owner: args.payer,
       })
       .instruction();
   }

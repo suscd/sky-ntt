@@ -211,6 +211,7 @@ export class SolanaNtt<N extends Network, C extends SolanaChains>
   async *setOwner(newOwner: AnySolanaAddress, payer: AccountAddress<C>) {
     const sender = new SolanaAddress(payer).unwrap();
     const ix = await NTT.createTransferOwnershipInstruction(this.program, {
+      payer: sender,
       newOwner: new SolanaAddress(newOwner).unwrap(),
     });
 
