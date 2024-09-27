@@ -26,7 +26,11 @@ use transceivers::wormhole::instructions::*;
 
 use instructions::*;
 
+#[cfg(feature = "token-sky")]
 declare_id!("STTzd1vq1QoxzHWR6dbcvg8uyiRGHh3sXqMdreYsYWh");
+
+#[cfg(feature = "token-usds")]
+declare_id!("STTaPviaZpRbBiubcx2QeDKViRB7scgg4kmonK1Wn3T");
 
 pub const TOKEN_AUTHORITY_SEED: &[u8] = b"token_authority";
 

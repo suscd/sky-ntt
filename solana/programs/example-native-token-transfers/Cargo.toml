@@ -9,7 +9,7 @@ crate-type = ["cdylib", "lib"]
 name = "example_native_token_transfers"
 
 [features]
-default = ["mainnet"]
+default = ["mainnet", "token-sky"]
 no-entrypoint = []
 no-idl = []
 no-log-ix-name = []
@@ -25,6 +25,8 @@ mainnet = [ "wormhole-anchor-sdk/mainnet" ]
 solana-devnet = [ "wormhole-anchor-sdk/solana-devnet" ]
 tilt-devnet = [ "wormhole-anchor-sdk/tilt-devnet" ]
 tilt-devnet2 = [ "tilt-devnet" ]
+token-sky = []
+token-usds = []
 
 [lints]
 workspace = true
