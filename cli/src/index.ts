@@ -1327,7 +1327,7 @@ async function deploySolana<N extends Network, C extends SolanaChains>(
 
     let binary: string;
 
-    const skipDeploy = false;
+    const skipDeploy = true;
 
     if (!skipDeploy) {
         if (binaryPath) {

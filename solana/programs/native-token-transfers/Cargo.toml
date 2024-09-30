@@ -1,12 +1,12 @@
 [package]
-name = "example-native-token-transfers"
+name = "native-token-transfers"
 version = "2.0.0"
 description = "Example implementation of native token transfer standard"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "example_native_token_transfers"
+name = "ntt"
 
 [features]
 default = ["mainnet", "token-sky"]
