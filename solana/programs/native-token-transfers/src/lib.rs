@@ -27,10 +27,10 @@ use transceivers::wormhole::instructions::*;
 use instructions::*;
 
 #[cfg(feature = "token-sky")]
-declare_id!("STTzd1vq1QoxzHWR6dbcvg8uyiRGHh3sXqMdreYsYWh");
+declare_id!("STTrhNsZyLN3srkazdo6LnpJ5RciJYP9N4zVwwYycw9");
 
 #[cfg(feature = "token-usds")]
-declare_id!("STTaPviaZpRbBiubcx2QeDKViRB7scgg4kmonK1Wn3T");
+declare_id!("STTb3N8SdASycVjRhgPZV7EgtdaW19pkuY5vGxTNEW6");
 
 pub const TOKEN_AUTHORITY_SEED: &[u8] = b"token_authority";
 
