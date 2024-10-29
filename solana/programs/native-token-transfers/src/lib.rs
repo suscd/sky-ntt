@@ -30,7 +30,7 @@ use instructions::*;
 declare_id!("STTrhNsZyLN3srkazdo6LnpJ5RciJYP9N4zVwwYycw9");
 
 #[cfg(feature = "token-usds")]
-declare_id!("STTb3N8SdASycVjRhgPZV7EgtdaW19pkuY5vGxTNEW6");
+declare_id!("STTUVCMPuNbk21y1J6nqEGXSQ8HKvFmFBKnCvKHTrWn");
 
 pub const TOKEN_AUTHORITY_SEED: &[u8] = b"token_authority";
 
