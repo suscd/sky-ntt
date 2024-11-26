@@ -27,7 +27,7 @@ use transceivers::wormhole::instructions::*;
 use instructions::*;
 
 #[cfg(feature = "token-sky")]
-declare_id!("STTrhNsZyLN3srkazdo6LnpJ5RciJYP9N4zVwwYycw9");
+declare_id!("STTZMMZhaytNtyHshzZ8HAgJoTVWhwrKFG7qk7xtSst");
 
 #[cfg(feature = "token-usds")]
 declare_id!("STTUVCMPuNbk21y1J6nqEGXSQ8HKvFmFBKnCvKHTrWn");
